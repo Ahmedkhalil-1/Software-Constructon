@@ -1,0 +1,59 @@
+import java.util.regex.Pattern;
+import java.util.ArrayList;
+import java.io.File;
+import java.util.Scanner;
+import java.util.regex.Matcher;
+
+public class Main 
+{
+    public static void main (String [] args)
+    {
+        try 
+        {
+            File file = new File("apple.txt");
+            Scanner scan = new Scanner(file);
+            
+            String line, patternKeyword, patternLiteral, patternVariable, patternOperator;
+            Pattern keyword, literal, variable, operator;
+            
+            patternKeyword = "(.)(public|class|static|void|String|int|if)(.)";
+            patternLiteral = "([0-9]|true|false|[0-9.]+[0-9]+|'[a-zA-Z0-9]'|\"[\\w\\W]*\")";
+            patternVariable = "[a-zA-Z][a-zA-Z0-9_]*";
+            patternOperator = "([\\+|\\-|\\*|\\/|=|>|<|>=|<=|\\&\\&]+)";
+            
+            keyword = Pattern.compile(patternKeyword);
+            literal = Pattern.compile(patternLiteral);
+            variable = Pattern.compile(patternVariable);
+            operator = Pattern.compile(patternOperator);
+            
+            while ( scan.hasNextLine() )
+            {
+                line = scan.nextLine();
+                String [] array = line.split(" ");
+                for (String token : array) {
+                    if ( keyword.matcher(token).matches() )
+                    {
+                        System.out.println("Keyword: " + token);
+                    }
+                    else if ( literal.matcher(token).matches() )
+                    {
+                        System.out.println("Literal: " + token);
+                    }
+                    else if ( variable.matcher(token).matches() )
+                    {
+                        System.out.println("Variable: " + token);
+                    }
+                    else if ( operator.matcher(token).matches() )
+                    {
+                        System.out.println("Operator: " + token);
+                    }
+                }
+                
+            }
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+    }
+}
