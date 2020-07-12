@@ -1,0 +1,17 @@
+import java.util.*; 
+import java.util.regex.*; 
+public class Main
+{ 
+    public static void main(String[] args)
+    {
+        System.out.print("Enter a string: ");
+        Scanner sc= new Scanner(System.in);
+        String str= sc.nextLine();  
+        StringTokenizer obj = new StringTokenizer(str," ");
+        System.out.println(“total laxenes are ”+obj.countTokens());
+        	while (obj.hasMoreTokens())
+{  
+System.out.println(obj.nextToken());  
+        	}       
+    }   
+}
